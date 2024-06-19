@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Build site for GitHub pages</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for build_site_github_pages {pkgdown}"><tr><td>build_site_github_pages {pkgdown}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Build site for GitHub pages</h2>
+
+<h3>Description</h3>
+
+<p>Designed to be run as part of automated workflows for deploying
+to GitHub pages. It cleans out the old site, builds the site into <code>dest_dir</code>
+adds a <code>.nojekyll</code> file to suppress rendering by Jekyll, and adds a <code>CNAME</code>
+file if needed.
+</p>
+<p>It is designed to be run in CI, so by default it:
+</p>
+
+<ul>
+<li><p> Cleans out the old site.
+</p>
+</li>
+<li><p> Does not install the package.
+</p>
+</li>
+<li><p> Runs <code><a href="build_site.html">build_site()</a></code> in process.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+build_site_github_pages(
+  pkg = ".",
+  ...,
+  dest_dir = "docs",
+  clean = TRUE,
+  install = FALSE,
+  new_process = FALSE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>pkg</code></td>
+<td>
+<p>Path to package.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed to <code><a href="build_site.html">build_site()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>dest_dir</code></td>
+<td>
+<p>Directory to build site in.</p>
+</td></tr>
+<tr valign="top"><td><code>clean</code></td>
+<td>
+<p>Clean all files from old site.</p>
+</td></tr>
+<tr valign="top"><td><code>install</code></td>
+<td>
+<p>If <code>TRUE</code>, will install the package in a temporary library
+so it is available for vignettes.</p>
+</td></tr>
+<tr valign="top"><td><code>new_process</code></td>
+<td>
+<p>If <code>TRUE</code>, will run <code>build_site()</code> in a separate process.
+This enhances reproducibility by ensuring nothing that you have loaded
+in the current process affects the build process.</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>pkgdown</em> version 2.0.9 <a href="00Index.html">Index</a>]</div>
+</body></html>

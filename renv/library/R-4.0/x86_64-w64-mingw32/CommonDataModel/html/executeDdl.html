@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generate and execute the DDL on a database</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for executeDdl {CommonDataModel}"><tr><td>executeDdl {CommonDataModel}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generate and execute the DDL on a database</h2>
+
+<h3>Description</h3>
+
+<p>This function will generate the DDL for a specific dbms and CDM version and
+then execute the DDL on a database.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+executeDdl(
+  connectionDetails,
+  cdmVersion,
+  cdmDatabaseSchema,
+  executeDdl = TRUE,
+  executePrimaryKey = TRUE,
+  executeForeignKey = TRUE,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>connectionDetails</code></td>
+<td>
+<p>An object of class connectionDetails as created by the DatabaseConnector::createConnectionDetails function.</p>
+</td></tr>
+<tr valign="top"><td><code>cdmVersion</code></td>
+<td>
+<p>The version of the CDM you are creating, e.g. 5.3, 5.4</p>
+</td></tr>
+<tr valign="top"><td><code>cdmDatabaseSchema</code></td>
+<td>
+<p>The schema of the CDM instance where the DDL will be run. For example, this would be &quot;ohdsi.dbo&quot; when testing on sql server.</p>
+</td></tr>
+<tr valign="top"><td><code>executeDdl</code></td>
+<td>
+<p>Should the DDL be executed? TRUE or FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>executePrimaryKey</code></td>
+<td>
+<p>Should the primary keys be added? TRUE or FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>executeForeignKey</code></td>
+<td>
+<p>Should the foreign keys be added? TRUE or FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed on to DatabaseConnector::executeSql. (This allows the user to set the path to errorReportFile.)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Writes the fully specified DDLs, primary keys, foreign keys, and indices to a file and then executes on a database.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+executeDdl(connectionDetails = connectionDetails,
+           cdmVersion = "5.4",
+           cdmDatabaseSchema = "myCdm")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>CommonDataModel</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

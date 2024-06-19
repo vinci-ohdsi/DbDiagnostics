@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Download Eunomia data files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for downloadEunomiaData {Eunomia}"><tr><td>downloadEunomiaData {Eunomia}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Download Eunomia data files</h2>
+
+<h3>Description</h3>
+
+<p>Download the Eunomia data files from https://github.com/OHDSI/EunomiaDatasets
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+downloadEunomiaData(
+  datasetName,
+  cdmVersion = "5.3",
+  pathToData = Sys.getenv("EUNOMIA_DATA_FOLDER"),
+  overwrite = FALSE,
+  verbose = FALSE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>datasetName</code></td>
+<td>
+<p>The data set name as found on https://github.com/OHDSI/EunomiaDatasets. The
+data set name corresponds to the folder with the data set ZIP files</p>
+</td></tr>
+<tr valign="top"><td><code>cdmVersion</code></td>
+<td>
+<p>The OMOP CDM version. This version will appear in the suffix of the data file,
+for example: &lt;datasetName&gt;_&lt;cdmVersion&gt;.zip. Default: '5.3'</p>
+</td></tr>
+<tr valign="top"><td><code>pathToData</code></td>
+<td>
+<p>The path where the Eunomia data is stored on the file system., By default the
+value of the environment variable &quot;EUNOMIA_DATA_FOLDER&quot; is used.</p>
+</td></tr>
+<tr valign="top"><td><code>overwrite</code></td>
+<td>
+<p>Control whether the existing archive file will be overwritten should it already
+exist.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>Provide additional logging details during execution.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Invisibly returns the destination if the download was successful.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+downloadEunomiaData("GiBleed")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>Eunomia</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

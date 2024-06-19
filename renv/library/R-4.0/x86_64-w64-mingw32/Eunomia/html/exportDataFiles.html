@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Export data files from a database(sqlite or duckdb)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for exportDataFiles {Eunomia}"><tr><td>exportDataFiles {Eunomia}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Export data files from a database(sqlite or duckdb)</h2>
+
+<h3>Description</h3>
+
+<p>Helper function to export data to csv or parquet files from a database file (sqlite or duckdb).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+exportDataFiles(
+  dbPath,
+  outputFolder,
+  outputFormat = "csv",
+  dbms = "sqlite",
+  verbose = FALSE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dbPath</code></td>
+<td>
+<p>The path to the source .sqlite or .duckdb file</p>
+</td></tr>
+<tr valign="top"><td><code>outputFolder</code></td>
+<td>
+<p>The path to the export destination directory</p>
+</td></tr>
+<tr valign="top"><td><code>outputFormat</code></td>
+<td>
+<p>The output format for the files.  Supported formats include csv, parquet.</p>
+</td></tr>
+<tr valign="top"><td><code>dbms</code></td>
+<td>
+<p>The file-based database system to use: 'sqlite' (default) or 'duckdb'</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>Boolean argument controlling verbose debugging output</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>No return value, called to export to outputFolder.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>Eunomia</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

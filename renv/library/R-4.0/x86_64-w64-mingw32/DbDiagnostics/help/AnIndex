@@ -1,0 +1,7 @@
+DbDiagnostics-package	DbDiagnostics-package
+collectMetadata	collectMetadata
+createDataDiagnosticsSettings	createDataDiagnosticsSettings
+createDataDiagnosticsSummary	createDataDiagnosticsSummary
+DbDiagnostics	DbDiagnostics-package
+executeDbDiagnostics	executeDbDiagnostics
+executeDbProfile	executeDbProfile

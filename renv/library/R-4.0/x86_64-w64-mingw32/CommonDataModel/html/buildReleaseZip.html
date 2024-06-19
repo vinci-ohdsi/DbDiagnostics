@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create OMOP CDM release zip</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for buildReleaseZip {CommonDataModel}"><tr><td>buildReleaseZip {CommonDataModel}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create OMOP CDM release zip</h2>
+
+<h3>Description</h3>
+
+<p>First calls <code>buildReleaseZips</code> for given cdmVersions and targetDialects.
+This writes the ddl sql files to the ddl folder.
+Then zips all written ddl files into a release zip to given output folder.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+buildReleaseZip(
+  cdmVersion,
+  targetDialect = listSupportedDialects(),
+  outputfolder = file.path(tempdir(), "output")
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>cdmVersion</code></td>
+<td>
+<p>The version of the CDM you are creating, e.g. 5.3, 5.4.
+Defaults to all supported CDM versions.</p>
+</td></tr>
+<tr valign="top"><td><code>targetDialect</code></td>
+<td>
+<p>The target dialect. Defaults to all supported dialects.</p>
+</td></tr>
+<tr valign="top"><td><code>outputfolder</code></td>
+<td>
+<p>The output folder. Defaults to &quot;output&quot;</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If no (or multiple) targetDialect is given,
+then one zip is written with the files of all supported dialects.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A character string containing the OHDSQL DDL
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+buildReleaseZip(cdmVersion='5.3', targetDialect='sql server', outputfolder='.')
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>CommonDataModel</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

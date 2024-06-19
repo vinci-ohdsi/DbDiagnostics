@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get current settings for figures</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fig_settings {pkgdown}"><tr><td>fig_settings {pkgdown}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get current settings for figures</h2>
+
+<h3>Description</h3>
+
+<p>You will generally not need to use this function unless you are handling
+custom plot output.
+</p>
+<p>Packages needing custom parameters should ask users to place them within
+the <code>other.parameters</code> entry under the package name, e.g.
+</p>
+<div class="sourceCode"><pre>figures:
+  other.parameters:
+    rgl:
+      fig.asp: 1
+</pre></div>
+
+
+<h3>Usage</h3>
+
+<pre>
+fig_settings()
+</pre>
+
+
+<h3>Value</h3>
+
+<p>A list containing the entries from the <code>figures</code> field in <code style="white-space: pre;">_pkgdown.yml</code>
+(see <code><a href="build_reference.html">build_reference()</a></code>), with default values added. Computed <code>width</code> and
+<code>height</code> values (in pixels) are also included.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>pkgdown</em> version 2.0.9 <a href="00Index.html">Index</a>]</div>
+</body></html>

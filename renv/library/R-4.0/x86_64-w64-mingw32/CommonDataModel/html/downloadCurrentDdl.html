@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get current DDL sitting on the main branch</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for downloadCurrentDdl {CommonDataModel}"><tr><td>downloadCurrentDdl {CommonDataModel}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get current DDL sitting on the main branch</h2>
+
+<h3>Description</h3>
+
+<p>Get current DDL sitting on the main branch
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+downloadCurrentDdl(
+  githubPath = "OHDSI/CommonDataModel",
+  pathToCsv = "Sql%20Server/OMOP%20CDM%20sql%20server%20ddl.txt",
+  outputFile = paste0("inst/sql/sql_server/OMOP CDM ddl ", Sys.Date(), ".sql")
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>githubPath</code></td>
+<td>
+<p>The path for the GitHub repo containing the package (e.g. 'OHDSI/CommonDataModel').</p>
+</td></tr>
+<tr valign="top"><td><code>pathToCsv</code></td>
+<td>
+<p>The path for the snapshot inside the package.</p>
+</td></tr>
+<tr valign="top"><td><code>outputFile</code></td>
+<td>
+<p>The path where the file should be saved.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function gets the current ddl on the CDM main branch. It will be taken from the Sql Server folder.
+The default location is
+<code>inst/settings/currentOmopDdl.sql</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The current DDL sitting on the main branch of the CommonDataModel repository.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+downloadCurrentDdl("OHDSI/CommonDataModel",
+ pathToCsv="Sql%20Server/OMOP%20CDM%20sql%20server%20ddl.txt")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>CommonDataModel</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

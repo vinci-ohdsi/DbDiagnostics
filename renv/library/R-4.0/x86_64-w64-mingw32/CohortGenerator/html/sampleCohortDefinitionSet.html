@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Sample Cohort Definition Set</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for sampleCohortDefinitionSet {CohortGenerator}"><tr><td>sampleCohortDefinitionSet {CohortGenerator}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Sample Cohort Definition Set</h2>
+
+<h3>Description</h3>
+
+<p>Create 1 or more sample of size n of a cohort definition set
+</p>
+<p>Subsetted cohorts can be sampled, as with any other subset form.
+However, subsetting a sampled cohort is not recommended and not currently supported at this time.
+In the case where n &gt; cohort count the entire cohort is copied unmodified
+</p>
+<p>As different databases have different forms of randomness, the random selection is computed in
+R, based on the count for each cohort. This is, therefore, db platform independent
+</p>
+<p>Note, this function assumes cohorts have already been generated.
+</p>
+<p>Lifecycle Note: This functionality is considered experimental and not intended for use inside analytic packages
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+sampleCohortDefinitionSet(
+  cohortDefinitionSet,
+  cohortIds = cohortDefinitionSet$cohortId,
+  connectionDetails = NULL,
+  connection = NULL,
+  tempEmulationSchema = getOption("sqlRenderTempEmulationSchema"),
+  cohortDatabaseSchema,
+  outputDatabaseSchema = cohortDatabaseSchema,
+  cohortTableNames = getCohortTableNames(),
+  n = NULL,
+  sampleFraction = NULL,
+  seed = 64374,
+  seedArgs = NULL,
+  identifierExpression = "cohortId * 1000 + seed",
+  incremental = FALSE,
+  incrementalFolder = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>cohortDefinitionSet</code></td>
+<td>
+<p>The <code>cohortDefinitionSet</code> argument must be a data frame with 
+the following columns: </p>
+
+<dl>
+<dt>cohortId</dt><dd><p>The unique integer identifier of the cohort</p>
+</dd> 
+<dt>cohortName</dt><dd><p>The cohort's name</p>
+</dd>
+<dt>sql</dt><dd><p>The OHDSI-SQL used to generate the cohort</p>
+</dd></dl>
+
+<p>Optionally, this data frame may contain: </p>
+
+<dl>
+<dt>json</dt><dd><p>The Circe JSON representation of the cohort</p>
+</dd></dl>
+</td></tr>
+<tr valign="top"><td><code>cohortIds</code></td>
+<td>
+<p>Optional subset of cohortIds to generate. By default this function will sample all cohorts</p>
+</td></tr>
+<tr valign="top"><td><code>connectionDetails</code></td>
+<td>
+<p>An object of type <code>connectionDetails</code> as created using the
+<code><a href="../../DatabaseConnector/html/createConnectionDetails.html">createConnectionDetails</a></code> function in the
+DatabaseConnector package. Can be left NULL if <code>connection</code> is
+provided.</p>
+</td></tr>
+<tr valign="top"><td><code>connection</code></td>
+<td>
+<p>An object of type <code>connection</code> as created using the
+<code><a href="../../DatabaseConnector/html/connect.html">connect</a></code> function in the
+DatabaseConnector package. Can be left NULL if <code>connectionDetails</code>
+is provided, in which case a new connection will be opened at the start
+of the function, and closed when the function finishes.</p>
+</td></tr>
+<tr valign="top"><td><code>tempEmulationSchema</code></td>
+<td>
+<p>Some database platforms like Oracle and Impala do not truly support
+temp tables. To emulate temp tables, provide a schema with write
+privileges where temp tables can be created.</p>
+</td></tr>
+<tr valign="top"><td><code>cohortDatabaseSchema</code></td>
+<td>
+<p>Schema name where your cohort tables reside. Note that for SQL Server,
+this should include both the database and schema name, for example
+'scratch.dbo'.</p>
+</td></tr>
+<tr valign="top"><td><code>outputDatabaseSchema</code></td>
+<td>
+<p>optional schema to output cohorts to (if different from cohortDatabaseSchema)</p>
+</td></tr>
+<tr valign="top"><td><code>cohortTableNames</code></td>
+<td>
+<p>The names of the cohort tables. See <code><a href="getCohortTableNames.html">getCohortTableNames</a></code>
+for more details.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Sample size. Ignored if sample fraction is set</p>
+</td></tr>
+<tr valign="top"><td><code>sampleFraction</code></td>
+<td>
+<p>Fraction of cohort to sample</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>Vector of seeds to give to the R pseudorandom number generator</p>
+</td></tr>
+<tr valign="top"><td><code>seedArgs</code></td>
+<td>
+<p>optional arguments to pass to set.seed</p>
+</td></tr>
+<tr valign="top"><td><code>identifierExpression</code></td>
+<td>
+<p>Optional string R expression used to compute output cohort id. Can only use variables
+cohortId and seed. Default is &quot;cohortId * 1000 + seed&quot;, which is substituted and evaluated</p>
+</td></tr>
+<tr valign="top"><td><code>incremental</code></td>
+<td>
+<p>Create only cohorts that haven't been created before?</p>
+</td></tr>
+<tr valign="top"><td><code>incrementalFolder</code></td>
+<td>
+<p>If <code>incremental = TRUE</code>, specify a folder where records are
+kept of which definition has been executed.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>sampledCohortDefinitionSet - a data.frame like object that contains the resulting identifiers and modified names of cohorts
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>CohortGenerator</em> version 0.9.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Build articles section</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for build_articles {pkgdown}"><tr><td>build_articles {pkgdown}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Build articles section</h2>
+
+<h3>Description</h3>
+
+<p><code>build_articles()</code> renders each R Markdown file underneath <code style="white-space: pre;">vignettes/</code> and
+saves it to <code style="white-space: pre;">articles/</code>. There are two exceptions:
+</p>
+
+<ul>
+<li><p> Files that start with <code style="white-space: pre;">_</code> (e.g., <code style="white-space: pre;">_index.Rmd</code>) are ignored,
+enabling the use of child documents.
+</p>
+</li>
+<li><p> Files in <code>vignettes/tutorials</code> are handled by <code><a href="build_tutorials.html">build_tutorials()</a></code>
+</p>
+</li></ul>
+
+<p>Vignettes are rendered using a special document format that reconciles
+<code><a href="../../rmarkdown/html/html_document.html">rmarkdown::html_document()</a></code> with the pkgdown template. This means articles
+behave slightly differently to vignettes, particularly with respect to
+external files, and custom output formats. See below for more details.
+</p>
+<p>Note that when you run <code>build_articles()</code> directly (outside of
+<code><a href="build_site.html">build_site()</a></code>) vignettes will use the currently installed version of the
+package, not the current source version. This makes iteration quicker when
+you are primarily working on the text of an article.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+build_articles(
+  pkg = ".",
+  quiet = TRUE,
+  lazy = TRUE,
+  seed = 1014L,
+  override = list(),
+  preview = NA
+)
+
+build_article(
+  name,
+  pkg = ".",
+  data = list(),
+  lazy = FALSE,
+  seed = 1014L,
+  new_process = TRUE,
+  quiet = TRUE
+)
+
+build_articles_index(pkg = ".")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>pkg</code></td>
+<td>
+<p>Path to package.</p>
+</td></tr>
+<tr valign="top"><td><code>quiet</code></td>
+<td>
+<p>Set to <code>FALSE</code> to display output of knitr and
+pandoc. This is useful when debugging.</p>
+</td></tr>
+<tr valign="top"><td><code>lazy</code></td>
+<td>
+<p>If <code>TRUE</code>, will only re-build article if input file has been
+modified more recently than the output file.</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>Seed used to initialize random number generation in order to
+make article output reproducible. An integer scalar or <code>NULL</code> for no seed.</p>
+</td></tr>
+<tr valign="top"><td><code>override</code></td>
+<td>
+<p>An optional named list used to temporarily override
+values in <code style="white-space: pre;">_pkgdown.yml</code></p>
+</td></tr>
+<tr valign="top"><td><code>preview</code></td>
+<td>
+<p>If <code>TRUE</code>, or <code>is.na(preview) &amp;&amp; interactive()</code>, will preview
+freshly generated section in browser.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>Name of article to render. This should be either a path
+relative to <code style="white-space: pre;">vignettes/</code> without extension, or <code>index</code> or <code>README</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Additional data to pass on to template.</p>
+</td></tr>
+<tr valign="top"><td><code>new_process</code></td>
+<td>
+<p>Build the article in a clean R process? The default,
+<code>TRUE</code>, ensures that every article is build in a fresh environment, but
+you may want to set it to <code>FALSE</code> to make debugging easier.</p>
+</td></tr>
+</table>
+
+
+<h3>Index and navbar</h3>
+
+<p>You can control the articles index and navbar with a <code>articles</code> field in
+your <code style="white-space: pre;">_pkgdown.yml</code>. If you use it, pkgdown will check that all articles
+are included, and will error if you have missed any.
+</p>
+<p>The <code>articles</code> field defines a list of sections, each of which
+can contain four fields:
+</p>
+
+<ul>
+<li> <p><code>title</code> (required): title of section, which appears as a heading on the
+articles index.
+</p>
+</li>
+<li> <p><code>desc</code> (optional): An optional markdown description displayed underneath
+the section title.
+</p>
+</li>
+<li> <p><code>navbar</code> (optional): A couple of words used to label this section in
+the navbar. If omitted, this section of vignettes will not appear in the
+navbar.
+</p>
+</li>
+<li> <p><code>contents</code> (required): a list of article names to include in the
+section. This can either be names of individual vignettes or a
+call to <code>starts_with()</code>. The name of a vignette includes its
+path under <code>vignettes</code> without extension so that the name of the vignette
+found at <code>vignettes/pizza/slice.Rmd</code> is <code>pizza/slice</code>.
+</p>
+</li></ul>
+
+<p>The title and description of individual vignettes displayed on the index
+comes from <code>title</code> and <code>description</code> fields of the YAML header in the Rmds.
+</p>
+<p>For example, this yaml might be used for some version of dplyr:
+</p>
+<div class="sourceCode yaml"><pre>articles:
+- title: Main verbs
+  navbar: ~
+  contents:
+  - one-table
+  - two-table
+  - rowwise
+  - colwise
+
+- title: Developer
+  desc: Vignettes aimed at package developers
+  contents:
+  - programming
+  - packages
+</pre></div>
+<p>Note the use of the <code>navbar</code> fields. <code style="white-space: pre;">navbar: ~</code> means that the &quot;Main verbs&quot;
+will appear in the navbar without a heading; the absence of the <code>navbar</code>
+field in the developer vignettes means that they will only be
+accessible via the articles index.
+</p>
+<p>The navbar will include a link to the articles index if one or more
+vignettes are not available through the navbar. If some vignettes appear
+in the navbar drop-down list and others do not, the list will automatically
+include a &quot;More ...&quot; link at the bottom; if no vignettes appear in the
+the navbar, it will link directly to the articles index instead of
+providing a drop-down.
+</p>
+
+
+<h3>Get started</h3>
+
+<p>Note that a vignette with the same name as the package (e.g.,
+<code>vignettes/pkgdown.Rmd</code> or <code>vignettes/articles/pkgdown.Rmd</code>) automatically
+becomes a top-level &quot;Get started&quot; link, and will not appear in the articles
+drop-down.
+</p>
+<p>(If your package name includes a <code>.</code>, e.g. <code>pack.down</code>, use a <code>-</code> in the
+vignette name, e.g. <code>pack-down.Rmd</code>.)
+</p>
+
+
+<h3>External files</h3>
+
+<p>pkgdown differs from base R in its handling of external files. When building
+vignettes, R assumes that vignettes are self-contained (a reasonable
+assumption when most vignettes were PDFs) and only copies files explicitly
+listed in <code>.install_extras</code>. pkgdown takes a different approach based on
+<code><a href="../../rmarkdown/html/find_external_resources.html">rmarkdown::find_external_resources()</a></code>, and it will also copy any images that
+you link to. If for some reason the automatic detection doesn't work, you
+will need to add a <code>resource_files</code> field to the yaml metadata, e.g.:
+</p>
+<div class="sourceCode yaml"><pre>---
+title: My Document
+resource_files:
+  - data/mydata.csv
+  - images/figure.png
+---
+</pre></div>
+<p>Note that you can not use the <code>fig.path</code> to change the output directory of
+generated figures as its default value is a strong assumption of rmarkdown.
+</p>
+
+
+<h3>Embedding Shiny apps</h3>
+
+<p>If you would like to embed a Shiny app into an article, the app will have
+to be hosted independently, (e.g. <a href="https://www.shinyapps.io">https://www.shinyapps.io</a>). Then, you
+can embed the app into your article using an <code style="white-space: pre;">&lt;iframe&gt;</code>, e.g.
+<code style="white-space: pre;">&lt;iframe src = "https://gallery.shinyapps.io/083-front-page" class="shiny-app"&gt;</code>.
+</p>
+<p>See <a href="https://github.com/r-lib/pkgdown/issues/838#issuecomment-430473856">https://github.com/r-lib/pkgdown/issues/838#issuecomment-430473856</a> for
+some hints on how to customise the appearance with CSS.
+</p>
+
+
+<h3>Output formats</h3>
+
+<p>By default, pkgdown builds all articles using the
+<code><a href="../../rmarkdown/html/html_document.html">rmarkdown::html_document()</a></code> <code>output</code> format, ignoring whatever is set in
+your YAML metadata. This is necessary because pkgdown has to integrate the
+HTML/CSS/JS from the vignette with the HTML/CSS/JS from rest of the site.
+Because of the challenges of combining two sources of HTML/CSS/JS, there is
+limited support for other output formats and you have to opt-in by setting
+the <code>as_is</code> field in your <code>.Rmd</code> metadata:
+</p>
+<div class="sourceCode yaml"><pre>pkgdown:
+  as_is: true
+</pre></div>
+<p>If the output format produces a PDF, you'll also need to specify the
+<code>extension</code> field:
+</p>
+<div class="sourceCode yaml"><pre>pkgdown:
+  as_is: true
+  extension: pdf
+</pre></div>
+<p>To work with pkgdown, the output format must accept <code>template</code>, <code>theme</code>, and
+<code>self_contained</code> arguments, and must work without any additional CSS or
+JSS files. Note that if you use
+<a href="https://bookdown.org/yihui/rmarkdown/html-document.html#shared-options"><code style="white-space: pre;">_output.yml</code></a>
+or <a href="https://rmarkdown.rstudio.com/docs/reference/render_site.html"><code style="white-space: pre;">_site.yml</code></a>
+you'll still need to add <code>as_is: true</code> to each individual vignette.
+</p>
+<p>Additionally, htmlwidgets do not work when <code>as_is: true</code>.
+</p>
+
+
+<h3>Suppressing vignettes</h3>
+
+<p>If you want articles that are not vignettes, either put them in
+subdirectories or list in <code>.Rbuildignore</code>. An articles link will be
+automatically added to the default navbar if the vignettes directory is
+present: if you do not want this, you will need to customise the navbar. See
+<code><a href="build_site.html">build_site()</a></code> details.
+</p>
+
+
+<h3>Figures</h3>
+
+<p>You can control the default rendering of figures by specifying the <code>figures</code>
+field in <code style="white-space: pre;">_pkgdown.yml</code>. The default settings are equivalent to:
+</p>
+<div class="sourceCode yaml"><pre>figures:
+  dev: ragg::agg_png
+  dpi: 96
+  dev.args: []
+  fig.ext: png
+  fig.width: 7.2916667
+  fig.height: ~
+  fig.retina: 2
+  fig.asp: 1.618
+  bg: NA
+  other.parameters: []
+</pre></div>
+<p>Most of these parameters are interpreted similarly to knitr chunk
+options. <code>other.parameters</code> is a list of parameters
+that will be available to custom graphics output devices such
+as HTML widgets.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>pkgdown</em> version 2.0.9 <a href="00Index.html">Index</a>]</div>
+</body></html>

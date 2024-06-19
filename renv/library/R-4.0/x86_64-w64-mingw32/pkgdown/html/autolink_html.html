@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Automatically link references and articles in an HTML page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for autolink_html {pkgdown}"><tr><td>autolink_html {pkgdown}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Automatically link references and articles in an HTML page</h2>
+
+<h3>Description</h3>
+
+<p>Deprecated: please use <a href="../../downlit/html/downlit_html_path.html">downlit::downlit_html_path</a> instead.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+autolink_html(input, output = input, local_packages = character())
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>input, output</code></td>
+<td>
+<p>Input and output paths for HTML file</p>
+</td></tr>
+<tr valign="top"><td><code>local_packages</code></td>
+<td>
+<p>A named character vector providing relative paths
+(value) to packages (name) that can be reached with relative links
+from the target HTML document.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+autolink_html("path/to/file.html",
+  local_packages = c(
+    shiny = "shiny",
+    shinydashboard = "shinydashboard"
+  )
+)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>pkgdown</em> version 2.0.9 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extract the Eunomia data files and load into a database...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for extractLoadData {Eunomia}"><tr><td>extractLoadData {Eunomia}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extract the Eunomia data files and load into a database
+Extract files from a .ZIP file and creates a OMOP CDM database that is then stored in the
+same directory as the .ZIP file.</h2>
+
+<h3>Description</h3>
+
+<p>Extract the Eunomia data files and load into a database
+Extract files from a .ZIP file and creates a OMOP CDM database that is then stored in the
+same directory as the .ZIP file.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+extractLoadData(
+  from,
+  to,
+  dbms = "sqlite",
+  cdmVersion = "5.3",
+  inputFormat = "csv",
+  verbose = FALSE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>from</code></td>
+<td>
+<p>The path to the .ZIP file that contains the csv CDM source files</p>
+</td></tr>
+<tr valign="top"><td><code>to</code></td>
+<td>
+<p>The path to the .sqlite or .duckdb file that will be created</p>
+</td></tr>
+<tr valign="top"><td><code>dbms</code></td>
+<td>
+<p>The file based database system to use: 'sqlite' (default) or 'duckdb'</p>
+</td></tr>
+<tr valign="top"><td><code>cdmVersion</code></td>
+<td>
+<p>The version of the OMOP CDM that are represented in the archive files.</p>
+</td></tr>
+<tr valign="top"><td><code>inputFormat</code></td>
+<td>
+<p>The format of the files expected in the archive. (csv or parquet)</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>Provide additional logging details during execution.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>No return value, called to load archive into a database file.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="downloadEunomiaData.html">downloadEunomiaData</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+extractLoadData("c:/strategusData/GiBleed_5.3.zip")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>Eunomia</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

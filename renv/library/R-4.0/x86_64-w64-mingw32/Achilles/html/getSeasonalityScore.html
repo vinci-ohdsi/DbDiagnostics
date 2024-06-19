@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get the seasonality score for a given monthly time series</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for getSeasonalityScore {Achilles}"><tr><td>getSeasonalityScore {Achilles}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get the seasonality score for a given monthly time series</h2>
+
+<h3>Description</h3>
+
+<p>The seasonality score of a monthly time series is computed as its departure from a uniform distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+getSeasonalityScore(tsData)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>tsData</code></td>
+<td>
+<p>A time series object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The degree of seasonality of a monthly time series is based on its departure from a uniform distribution.
+If the number of cases for a given concept is uniformly distributed across all time periods (in this case, all months), 
+then its monthly proportion would be approximately constant.  In this case, the time series would be
+considered &quot;strictly non-seasonal&quot; and its &quot;seasonality score&quot; would be zero.
+Similarly, if all cases recur at a single point in time (that is, in a single month), such a time series would be considered
+&quot;strictly seasonal&quot; and its seasonality score would be 1.  All other time series would have
+a seasonality score between 0 and 1.  Currently, only monthly time series are supported.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A numeric value between 0 and 1 (inclusive) representing the seasonality of a time series.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>Achilles</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Build search index</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for build_search {pkgdown}"><tr><td>build_search {pkgdown}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Build search index</h2>
+
+<h3>Description</h3>
+
+<p>Build a JSON file encompassing all HTML pages, for use by the search script.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+build_search(pkg = ".", override = list())
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>pkg</code></td>
+<td>
+<p>Path to package.</p>
+</td></tr>
+<tr valign="top"><td><code>override</code></td>
+<td>
+<p>An optional named list used to temporarily override
+values in <code style="white-space: pre;">_pkgdown.yml</code></p>
+</td></tr>
+</table>
+
+
+<h3>YAML config</h3>
+
+<p>You can exclude some paths from the search index.
+Below we exclude the changelog from the search index.
+</p>
+<div class="sourceCode yaml"><pre>search:
+  exclude: ['news/index.html']
+</pre></div>
+
+
+<h3>Debugging and local testing</h3>
+
+<p>Locally (as opposed to on GitHub Pages or Netlify for instance),
+search won't work if you simply use pkgdown preview of the static files.
+You can use <code>servr::httw("docs")</code> instead.
+</p>
+<p>If search is not working, run <code>pkgdown::pkgdown_sitrep()</code> to eliminate
+common issues such as the absence of URL in the pkgdown configuration file
+of your package.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>pkgdown</em> version 2.0.9 <a href="00Index.html">Index</a>]</div>
+</body></html>

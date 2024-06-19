@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Build reference section</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for build_reference {pkgdown}"><tr><td>build_reference {pkgdown}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Build reference section</h2>
+
+<h3>Description</h3>
+
+<p>By default, pkgdown will generate an index that lists all functions in
+alphabetical order. To override this, provide a <code>reference</code> section in your
+<code style="white-space: pre;">_pkgdown.yml</code> as described below.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+build_reference(
+  pkg = ".",
+  lazy = TRUE,
+  examples = TRUE,
+  run_dont_run = FALSE,
+  seed = 1014L,
+  override = list(),
+  preview = NA,
+  devel = TRUE,
+  document = "DEPRECATED",
+  topics = NULL
+)
+
+build_reference_index(pkg = ".")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>pkg</code></td>
+<td>
+<p>Path to package.</p>
+</td></tr>
+<tr valign="top"><td><code>lazy</code></td>
+<td>
+<p>If <code>TRUE</code>, only rebuild pages where the <code>.Rd</code>
+is more recent than the <code>.html</code>. This makes it much easier to
+rapidly prototype. It is set to <code>FALSE</code> by <code><a href="build_site.html">build_site()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>examples</code></td>
+<td>
+<p>Run examples?</p>
+</td></tr>
+<tr valign="top"><td><code>run_dont_run</code></td>
+<td>
+<p>Run examples that are surrounded in \dontrun?</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>Seed used to initialize random number generation in order to
+make article output reproducible. An integer scalar or <code>NULL</code> for no seed.</p>
+</td></tr>
+<tr valign="top"><td><code>override</code></td>
+<td>
+<p>An optional named list used to temporarily override
+values in <code style="white-space: pre;">_pkgdown.yml</code></p>
+</td></tr>
+<tr valign="top"><td><code>preview</code></td>
+<td>
+<p>If <code>TRUE</code>, or <code>is.na(preview) &amp;&amp; interactive()</code>, will preview
+freshly generated section in browser.</p>
+</td></tr>
+<tr valign="top"><td><code>devel</code></td>
+<td>
+<p>Determines how code is loaded in order to run examples.
+If <code>TRUE</code> (the default), assumes you are in a live development
+environment, and loads source package with <code><a href="../../pkgload/html/load_all.html">pkgload::load_all()</a></code>.
+If <code>FALSE</code>, uses the installed version of the package.</p>
+</td></tr>
+<tr valign="top"><td><code>document</code></td>
+<td>
+<p><strong>Deprecated</strong> Use <code>devel</code> instead.</p>
+</td></tr>
+<tr valign="top"><td><code>topics</code></td>
+<td>
+<p>Build only specified topics. If supplied, sets <code>lazy</code>
+and <code>preview</code> to <code>FALSE</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Reference index</h3>
+
+<p>To tweak the index page, add a section called <code>reference</code> to <code style="white-space: pre;">_pkgdown.yml</code>.
+It can contain three different types of element:
+</p>
+
+<ul>
+<li><p> A <strong>title</strong> (<code>title</code> + <code>desc</code>), which generates an row containing an <code style="white-space: pre;">&lt;h2&gt;</code>
+with optional paragraph description.
+</p>
+</li>
+<li><p> A <strong>subtitle</strong> (<code>subtitle</code> + <code>desc</code>), which generates an row containing an
+<code style="white-space: pre;">&lt;h3&gt;</code> with optional paragraph description.
+</p>
+</li>
+<li><p> A <strong>list of topics</strong> (<code>contents</code>), which generates one row for each topic,
+with a list of aliases for the topic on the left, and the topic title
+on the right.
+</p>
+</li></ul>
+
+<p>(For historical reasons you can include <code>contents</code> with a title or
+subtitle, but this is no longer recommended).
+</p>
+<p>Most packages will only need to use <code>title</code> and <code>contents</code> components.
+For example, here's a snippet from the YAML that pkgdown uses to generate
+its own reference index:
+</p>
+<div class="sourceCode yaml"><pre>reference:
+- title: Build
+  desc:  Build a complete site or its individual section components.
+- contents:
+  - starts_with("build_")
+- title: Templates
+- contents:
+  - template_navbar
+  - render_page
+</pre></div>
+<p>Bigger packages, e.g. ggplot2, may need an additional layer of
+structure in order to clearly organise large number of functions:
+</p>
+<div class="sourceCode yaml"><pre>reference:
+- title: Layers
+- subtitle: Geoms
+  desc: Geom is short for geometric element
+- contents:
+  - starts_with("geom")
+- subtitle: Stats
+  desc: Statistical transformations transform data before display.
+  contents:
+  - starts_with("stat")
+</pre></div>
+<p><code>desc</code> can use markdown, and if you have a long description it's a good
+idea to take advantage of the YAML <code>&gt;</code> notation:
+</p>
+<div class="sourceCode yaml"><pre>desc: &gt;
+  This is a very _long_ and **overly** flowery description of a
+  single simple function. By using `&gt;`, it's easy to write a description
+  that runs over multiple lines.
+</pre></div>
+
+
+<h4>Topic matching</h4>
+
+<p><code>contents</code> can contain:
+</p>
+
+<ul>
+<li><p> Individual function/topic names.
+</p>
+</li>
+<li><p> Weirdly named functions with doubled quoting, once for YAML and once for
+R, e.g. <code>"`+.gg`"</code>.
+</p>
+</li>
+<li> <p><code>starts_with("prefix")</code> to select all functions with common prefix.
+</p>
+</li>
+<li> <p><code>ends_with("suffix")</code> to select all functions with common suffix.
+</p>
+</li>
+<li> <p><code>matches("regexp")</code> for more complex regular expressions.
+</p>
+</li>
+<li> <p><code>has_keyword("x")</code> to select all topics with keyword &quot;x&quot;;
+<code>has_keyword("datasets")</code> selects all data documentation.
+</p>
+</li>
+<li> <p><code>has_concept("blah")</code> to select all topics with concept &quot;blah&quot;.
+If you are using roxygen2, <code>has_concept()</code> also matches family tags, because
+roxygen2 converts them to concept tags.
+</p>
+</li>
+<li> <p><code>lacks_concepts(c("concept1", "concept2"))</code> to select all topics
+without those concepts. This is useful to capture topics not otherwise
+captured by <code>has_concepts()</code>.
+</p>
+</li>
+<li><p> Topics from other installed packages, e.g. <code>rlang::is_installed()</code> (function name)
+or <code>sass::font_face</code> (topic name).
+</p>
+</li></ul>
+
+<p>All functions (except for <code>has_keywords()</code>) automatically exclude internal
+topics (i.e. those with <code style="white-space: pre;">\keyword{internal}</code>). You can choose to include
+with (e.g.) <code>starts_with("build_", internal = TRUE)</code>.
+</p>
+<p>Use a leading <code>-</code> to remove topics from a section, e.g. <code>-topic_name</code>,
+<code>-starts_with("foo")</code>.
+</p>
+<p>pkgdown will check that all non-internal topics are included on
+the reference index page, and error if you have missed any.
+</p>
+
+
+
+<h4>Missing topics</h4>
+
+<p>pkgdown will warn if there are (non-internal) topics that not listed
+in the reference index. You can suppress these warnings by listing the
+topics in section with &quot;title: internal&quot; (case sensitive) which will not be
+displayed on the reference index.
+</p>
+
+
+
+<h4>Icons</h4>
+
+<p>You can optionally supply an icon for each help topic. To do so, you'll need
+a top-level <code>icons</code> directory. This should contain <code>.png</code> files that are
+either 30x30 (for regular display) or 60x60 (if you want retina display).
+Icons are matched to topics by aliases.
+</p>
+
+
+
+<h4>Examples</h4>
+
+<p>If you need to run extra code before or after all examples are run, you
+can create <code>pkgdown/pre-reference.R</code> and <code>pkgdown/post-reference.R</code>.
+</p>
+
+
+
+<h3>Figures</h3>
+
+<p>You can control the default rendering of figures by specifying the <code>figures</code>
+field in <code style="white-space: pre;">_pkgdown.yml</code>. The default settings are equivalent to:
+</p>
+<div class="sourceCode yaml"><pre>figures:
+  dev: ragg::agg_png
+  dpi: 96
+  dev.args: []
+  fig.ext: png
+  fig.width: 7.2916667
+  fig.height: ~
+  fig.retina: 2
+  fig.asp: 1.618
+  bg: NA
+  other.parameters: []
+</pre></div>
+<p>Most of these parameters are interpreted similarly to knitr chunk
+options. <code>other.parameters</code> is a list of parameters
+that will be available to custom graphics output devices such
+as HTML widgets.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>pkgdown</em> version 2.0.9 <a href="00Index.html">Index</a>]</div>
+</body></html>

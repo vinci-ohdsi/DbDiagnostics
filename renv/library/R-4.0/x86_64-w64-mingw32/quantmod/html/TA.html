@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add Technical Indicator to Chart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for TA {quantmod}"><tr><td>TA {quantmod}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Add Technical Indicator to Chart </h2>
+
+<h3>Description</h3>
+
+<p>Functions to add technical indicators to a chart.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The general mechanism to add technical analysis studies or overlays
+to a financial chart created with <code>chartSeries</code>.
+</p>
+<p>General TA charting tool functions:
+</p>
+
+<ul>
+<li> <p><code>addTA</code>: add data as custom indicator
+</p>
+</li>
+<li> <p><code>dropTA</code>: remove technical indicator
+</p>
+</li>
+<li> <p><code>moveTA</code>: move a technical indicator
+</p>
+</li>
+<li> <p><code>swapTA</code>: swap two technical indicators
+</p>
+</li></ul>
+
+<p>Current technical indicators include:
+</p>
+
+<ul>
+<li> <p><code>addADX</code>: add Welles Wilder's Directional Movement Indicator
+</p>
+</li>
+<li> <p><code>addATR</code>: add Average True Range
+</p>
+</li>
+<li> <p><code>addAroon</code>: add Aroon Indicator
+</p>
+</li>
+<li> <p><code>addAroonOsc</code>: add Aroon Oscillator
+</p>
+</li>
+<li> <p><code>addBBands</code>: add Bollinger Bands
+</p>
+</li>
+<li> <p><code>addCCI</code>: add Commodity Channel Index
+</p>
+</li>
+<li> <p><code>addCMF</code>: add Chaiken Money Flow
+</p>
+</li>
+<li> <p><code>addChAD</code>: add Chaiken Accumulation Distribution Line
+</p>
+</li>
+<li> <p><code>addChVol</code>: add Chaiken Volatility
+</p>
+</li>
+<li> <p><code>addCMO</code>: add Chande Momentum Oscillator
+</p>
+</li>
+<li> <p><code>addDEMA</code>: add Double Exponential Moving Average
+</p>
+</li>
+<li> <p><code>addDPO</code>: add Detrended Price Oscillator
+</p>
+</li>
+<li> <p><code>addEMA</code>: add Exponential Moving Average
+</p>
+</li>
+<li> <p><code>addEMV</code>: add Arm's Ease of Movement
+</p>
+</li>
+<li> <p><code>addEnvelope</code>: add Moving Average Envelope
+</p>
+</li>
+<li> <p><code>addEVWMA</code>: add Exponential Volume Weighted Moving Average
+</p>
+</li>
+<li> <p><code>addExpiry</code>: add options or futures expiration lines
+</p>
+</li>
+<li> <p><code>addKST</code>: add Know Sure Thing
+</p>
+</li>
+<li> <p><code>addLines</code>: add line(s)
+</p>
+</li>
+<li> <p><code>addMACD</code>: add Moving Average Convergence Divergence
+</p>
+</li>
+<li> <p><code>addMFI</code>: add Money Flow Index
+</p>
+</li>
+<li> <p><code>addMomentum</code>: add Momentum
+</p>
+</li>
+<li> <p><code>addOBV</code>: add On-Balance Volume
+</p>
+</li>
+<li> <p><code>addPoints</code>: add point(s)
+</p>
+</li>
+<li> <p><code>addROC</code>: add Rate of Change
+</p>
+</li>
+<li> <p><code>addRSI</code>: add Relative Strength Indicator
+</p>
+</li>
+<li> <p><code>addSAR</code>: add Parabolic SAR
+</p>
+</li>
+<li> <p><code>addSMA</code>: add Simple Moving Average
+</p>
+</li>
+<li> <p><code>addSMI</code>: add Stochastic Momentum Index
+</p>
+</li>
+<li> <p><code>addTDI</code>: add Trend Direction Index
+</p>
+</li>
+<li> <p><code>addTRIX</code>: add Triple Smoothed Exponential Oscillator
+</p>
+</li>
+<li> <p><code>addVo</code>: add Volume (if available)
+</p>
+</li>
+<li> <p><code>addVolatility</code>: add volatility
+</p>
+</li>
+<li> <p><code>addWMA</code>: add Weighted Moving Average
+</p>
+</li>
+<li> <p><code>addWPR</code>: add Williams Percent R
+</p>
+</li>
+<li> <p><code>addZigZag</code>: add Zig Zag
+</p>
+</li>
+<li> <p><code>addZLEMA</code>: add ZLEMA
+</p>
+</li></ul>
+
+<p>See the individual functions for specific implementation and argument details.  Details
+of the underlying TTR implementations can be found in <span class="pkg">TTR</span>.
+</p>
+<p>The primary changes between the add*** version of an indicator and the
+<span class="pkg">TTR</span> base function is the absense of the data argument in the former.
+</p>
+<p>Notable additions include <code>on</code>, <code>with.col</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Called for its side effects, an object to class <code>chobTA</code>
+will be returned invisibly.  If called from the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> command line
+the method will draw the appropriate indicator on the current chart.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Calling any of the above methods from within a function or script
+will generally require them to be wrapped in a <code>plot</code> call
+as they rely on the context of the call to initiate the actual
+charting addition.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Jeffrey A. Ryan </p>
+
+
+<h3>References</h3>
+
+<p> Josh Ulrich - TTR package </p>
+
+<hr /><div style="text-align: center;">[Package <em>quantmod</em> version 0.4.26 <a href="00Index.html">Index</a>]</div>
+</body></html>

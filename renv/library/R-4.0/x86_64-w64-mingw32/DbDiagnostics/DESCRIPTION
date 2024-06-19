@@ -1,0 +1,26 @@
+Package: DbDiagnostics
+Type: Package
+Title: OMOP CDM Database Diagnostics Utility
+Version: 1.3.1
+Date: 2022-04-26
+Authors@R: c(
+  person("Clair", "Blacketer", , "mblacke@its.jnj.com", role = c("aut", "cre")),
+	person("Frank", "DeFalco", role = c("aut"))
+	)
+Maintainer: Clair Blacketer <mblacke@its.jnj.com>
+Description: Functions for extracting profile data for an OMOP CDM database and determining if the database is appropriate for individual use cases.
+License: Apache License 2.0
+VignetteBuilder: knitr
+Depends: R (>= 3.5.0), DatabaseConnector (>= 4.0.0), ParallelLogger,
+        lubridate
+Imports: dplyr, tidyr, sqldf, magrittr, svDialogs, SqlRender (>=
+        1.7.0), Achilles (>= 1.7.0), DataQualityDashboard (>= 1.4.0),
+        CohortGenerator, testthat, rmarkdown, Eunomia
+Suggests: knitr
+Remotes: ohdsi/Eunomia, ohdsi/Achilles, ohdsi/DataQualityDashboard
+RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE)
+Encoding: UTF-8
+Author: Clair Blacketer [aut, cre],
+  Frank DeFalco [aut]
+Built: R 4.0.3; ; 2024-06-19 20:30:05 UTC; windows

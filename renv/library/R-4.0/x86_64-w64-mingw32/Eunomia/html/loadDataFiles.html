@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Load data files into a database(sqlite or duckdb)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for loadDataFiles {Eunomia}"><tr><td>loadDataFiles {Eunomia}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Load data files into a database(sqlite or duckdb)</h2>
+
+<h3>Description</h3>
+
+<p>Load data from csv or parquet files into a database file (sqlite or duckdb).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+loadDataFiles(
+  dataPath,
+  dbPath,
+  inputFormat = "csv",
+  cdmVersion = "5.3",
+  cdmDatabaseSchema = "main",
+  dbms = "sqlite",
+  verbose = FALSE,
+  overwrite = FALSE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dataPath</code></td>
+<td>
+<p>The path to the directory containing CDM source files (csv or parquet)</p>
+</td></tr>
+<tr valign="top"><td><code>dbPath</code></td>
+<td>
+<p>The path to the .sqlite or .duckdb file that will be created</p>
+</td></tr>
+<tr valign="top"><td><code>inputFormat</code></td>
+<td>
+<p>The input format of the files to load.  Supported formats include csv, parquet.</p>
+</td></tr>
+<tr valign="top"><td><code>cdmVersion</code></td>
+<td>
+<p>The CDM version to create in the resulting database. Supported versions are 5.3 and 5.4</p>
+</td></tr>
+<tr valign="top"><td><code>cdmDatabaseSchema</code></td>
+<td>
+<p>The schema in which to create the CDM tables. Default is main.</p>
+</td></tr>
+<tr valign="top"><td><code>dbms</code></td>
+<td>
+<p>The file-based database system to use: 'sqlite' (default) or 'duckdb'</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>Provide additional logging details during execution.</p>
+</td></tr>
+<tr valign="top"><td><code>overwrite</code></td>
+<td>
+<p>Remove and replace an existing data set.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>No return value, loads data into database file.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>Eunomia</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

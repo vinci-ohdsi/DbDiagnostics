@@ -1,0 +1,4 @@
+executeDqChecks         Execute DQ checks
+viewDqDashboard         View DQ Dashboard
+writeJsonResultsToTable
+                        Write JSON Results to SQL Table

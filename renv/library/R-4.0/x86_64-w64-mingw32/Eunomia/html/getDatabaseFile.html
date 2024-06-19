@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a copy of a Eunomia dataset</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for getDatabaseFile {Eunomia}"><tr><td>getDatabaseFile {Eunomia}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a copy of a Eunomia dataset</h2>
+
+<h3>Description</h3>
+
+<p>Creates a copy of a Eunomia database, and returns the path to the new database file.
+If the dataset does not yet exist on the user's computer it will attempt to download the source data
+to the the path defined by the EUNOMIA_DATA_FOLDER environment variable.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+getDatabaseFile(
+  datasetName,
+  cdmVersion = "5.3",
+  pathToData = Sys.getenv("EUNOMIA_DATA_FOLDER"),
+  dbms = "sqlite",
+  databaseFile = tempfile(fileext = paste0(".", dbms)),
+  inputFormat = "csv",
+  verbose = FALSE,
+  overwrite = TRUE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>datasetName</code></td>
+<td>
+<p>The data set name as found on https://github.com/OHDSI/EunomiaDatasets. The
+data set name corresponds to the folder with the data set ZIP files</p>
+</td></tr>
+<tr valign="top"><td><code>cdmVersion</code></td>
+<td>
+<p>The OMOP CDM version. This version will appear in the suffix of the data file,
+for example: &lt;datasetName&gt;_&lt;cdmVersion&gt;.zip. Default: '5.3'</p>
+</td></tr>
+<tr valign="top"><td><code>pathToData</code></td>
+<td>
+<p>The path where the Eunomia data is stored on the file system., By default the
+value of the environment variable &quot;EUNOMIA_DATA_FOLDER&quot; is used.</p>
+</td></tr>
+<tr valign="top"><td><code>dbms</code></td>
+<td>
+<p>The database system to use. &quot;sqlite&quot; (default) or &quot;duckdb&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>databaseFile</code></td>
+<td>
+<p>The path where the database file will be copied to. By default, the database
+will be copied to a temporary folder, and will be deleted at the end of the R
+session.</p>
+</td></tr>
+<tr valign="top"><td><code>inputFormat</code></td>
+<td>
+<p>The format of the files expected in the archive. (csv or parquet)</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>Provide additional logging details during execution</p>
+</td></tr>
+<tr valign="top"><td><code>overwrite</code></td>
+<td>
+<p>Remove and replace an existing data set.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The file path to the new Eunomia dataset copy
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+ conn &lt;- DBI::dbConnect(RSQLite::SQLite(), getDatabaseFile("GiBleed"))
+ DBI::dbDisconnect(conn)
+
+ conn &lt;- DBI::dbConnect(duckdb::duckdb(), getDatabaseFile("GiBleed", dbms = "duckdb"))
+ DBI::dbDisconnect(conn, shutdown = TRUE)
+
+ conn &lt;- DatabaseConnector::connect(dbms = "sqlite", server = getDatabaseFile("GiBleed"))
+ DatabaseConnector::disconnect(conn)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>Eunomia</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

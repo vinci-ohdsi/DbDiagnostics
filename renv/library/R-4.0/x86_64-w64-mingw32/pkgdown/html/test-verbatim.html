@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Test case: preformatted blocks &amp; syntax highlighting</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for test-verbatim {pkgdown}"><tr><td>test-verbatim {pkgdown}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Test case: preformatted blocks &amp; syntax highlighting</h2>
+
+<h3>Description</h3>
+
+<p>Manual test cases for various ways of embedding code in sections.
+All code blocks should have copy and paste button.
+</p>
+
+
+<h3>Should be highlighted</h3>
+
+<p>Valid R code in <code style="white-space: pre;">\preformatted{}</code>:
+</p>
+<div class="sourceCode"><pre>mean(a + 1)
+</pre></div>
+<p>R code in <code>R</code> block:
+</p>
+<div class="sourceCode R"><pre>mean(a + 1)
+</pre></div>
+<p>R code in <code>r</code> block:
+</p>
+<div class="sourceCode r"><pre>mean(a + 1)
+</pre></div>
+<p>Yaml
+</p>
+<div class="sourceCode yaml"><pre>yaml: [a, 1]
+</pre></div>
+
+
+<h3>Shouldn't be highlighted</h3>
+
+<p>Non-R code in <code style="white-space: pre;">\preformatted{}</code>
+</p>
+<div class="sourceCode"><pre>yaml: [a, b, c]
+</pre></div>
+
+
+<h3>See Also</h3>
+
+<p>Other tests: 
+<code><a href="index.html">index</a></code>,
+<code><a href="test-crayon.html">test-crayon</a></code>,
+<code><a href="test-dont.html">test-dont</a></code>,
+<code><a href="test-figures.html">test-figures</a></code>,
+<code><a href="test-links.html">test-links</a></code>,
+<code><a href="test-lists.html">test-lists</a></code>,
+<code><a href="test-long-lines.html">test-long-lines</a></code>,
+<code><a href="test-output-styles.html">test-output-styles</a></code>,
+<code><a href="test-params.html">test-params</a></code>,
+<code><a href="test-sexpr-title.html">test-sexpr-title</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>pkgdown</em> version 2.0.9 <a href="00Index.html">Index</a>]</div>
+</body></html>

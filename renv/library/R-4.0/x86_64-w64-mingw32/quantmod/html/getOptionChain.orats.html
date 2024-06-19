@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Download Option Chain Data from orats</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for getOptionChain.orats {quantmod}"><tr><td>getOptionChain.orats {quantmod}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Download Option Chain Data from orats </h2>
+
+<h3>Description</h3>
+
+<p>Function to download option chain data from orats.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+getOptionChain.orats(Symbols, Exp, api.key, dte, delta)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>Symbols</code></td>
+<td>
+<p> The name of the underlying symbol. Source &lsquo;yahoo&rsquo; only 
+allows for a single ticker while source &lsquo;orats&rsquo; can return multiple tickers.</p>
+</td></tr>
+<tr valign="top"><td><code>Exp</code></td>
+<td>
+<p> One or more expiration dates, NULL, or an ISO-8601 style string.
+If <code>Exp</code> is missing, only the front month contract will be returned.
+</p>
+</td></tr>
+<tr valign="top"><td><code>api.key</code></td>
+<td>
+<p> A character vector for the key given with an account for 
+accessing the orats API. If missing, the function will look for an
+environment variable <code>ORATS_API_KEY</code> containing the API key.</p>
+</td></tr>
+<tr valign="top"><td><code>dte</code></td>
+<td>
+<p> A vector of two integers giving
+a range of expiry dates to subset the results by.</p>
+</td></tr>
+<tr valign="top"><td><code>delta</code></td>
+<td>
+<p>A vector of two integers giving
+a range deltas to subset the results by.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function is a wrapper to data-provider specific
+APIs.  By default the data is sourced from yahoo.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For orats, returns A named list containing five data.frames, one
+each for calls and puts that follows a similar form to the return 
+from yahoo, but does not have a Last price and instead has a
+Ticker column for multiple ticker requests. The *_extra data.frames
+contain additional information from the &lsquo;orats&rsquo; API end point
+whose definitions are available at the URL in the references.
+If more than one expiration was requested, The results will be returned as
+a list within list of length <code>length(Exp)</code>.
+Each element of this list will be named with the expiration
+month, day, and year (%b.%d.%Y).
+</p>
+<p>If <code>Exp</code> is set to <code>NULL</code>, all expirations
+will be returned. Not explicitly setting will only
+return the front month.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Steve Bronder </p>
+
+
+<h3>References</h3>
+
+<p><a href="https://docs.orats.io/datav2-api-guide/data.html#strikes">https://docs.orats.io/datav2-api-guide/data.html#strikes</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+# Only the front-month expiry
+AAPL.OPT &lt;- getOptionChain("AAPL", 
+  api.key = Sys.getenv("ORATS_API_KEY"))
+# All expiries
+AAPL.OPTS &lt;- getOptionChain("AAPL", NULL,
+  api.key = Sys.getenv("ORATS_API_KEY"))
+# All 2015 and 2016 expiries
+AAPL.2015 &lt;- getOptionChain("AAPL", "2015/2016", 
+  api.key = Sys.getenv("ORATS_API_KEY"))
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>quantmod</em> version 0.4.26 <a href="00Index.html">Index</a>]</div>
+</body></html>

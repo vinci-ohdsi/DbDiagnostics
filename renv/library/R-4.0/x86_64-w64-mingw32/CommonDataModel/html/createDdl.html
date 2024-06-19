@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create the OHDSI-SQL Common Data Model DDL code</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for createDdl {CommonDataModel}"><tr><td>createDdl {CommonDataModel}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create the OHDSI-SQL Common Data Model DDL code</h2>
+
+<h3>Description</h3>
+
+<p>The createDdl, createForeignKeys, and createPrimaryKeys functions each return a character string
+containing their respective DDL SQL code in OHDSQL dialect for a specific CDM version.
+The SQL they generate needs to be rendered and translated before it can be executed.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+createDdl(cdmVersion)
+
+createPrimaryKeys(cdmVersion)
+
+createForeignKeys(cdmVersion)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>cdmVersion</code></td>
+<td>
+<p>The version of the CDM you are creating, e.g. 5.3, 5.4</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The DDL SQL code is created from a two csv files that detail the OMOP CDM Specifications.
+These files also form the basis of the CDM documentation and the Data Quality
+Dashboard.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A character string containing the OHDSQL DDL
+</p>
+<p>A string containing the OHDSQL for creation of primary keys in the OMOP CDM.
+</p>
+<p>A string containing the OHDSQL for creation of foreign keys in the OMOP CDM.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>createPrimaryKeys()</code>: createPrimaryKeys Returns a string containing the OHDSQL for creation of primary keys in the OMOP CDM.
+</p>
+</li>
+<li> <p><code>createForeignKeys()</code>: createForeignKeys Returns a string containing the OHDSQL for creation of foreign keys in the OMOP CDM.
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+ddl &lt;- createDdl("5.4")
+pk &lt;- createPrimaryKeys("5.4")
+fk &lt;- createForeignKeys("5.4")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>CommonDataModel</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

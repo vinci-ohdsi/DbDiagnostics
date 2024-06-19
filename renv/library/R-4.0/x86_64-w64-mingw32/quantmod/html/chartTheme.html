@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create A Chart Theme</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for chartTheme {quantmod}"><tr><td>chartTheme {quantmod}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Create A Chart Theme </h2>
+
+<h3>Description</h3>
+
+<p>Create a chart.theme object for use within chartSeries
+to manage desired chart colors.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+chartTheme(theme = "black", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>theme</code></td>
+<td>
+<p> name of base theme </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p> name=value pairs to modify </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Used as an argument to the chartSeries family of functions,
+<code>chartTheme</code> allows for on-the-fly modification
+of pre-specified chart &lsquo;themes&rsquo;.  Users can modify
+a pre-built theme in-place, or copy the theme to a new
+variable for use in subsequent charting calls.
+</p>
+<p>Internally a chart.theme object is nothing more than
+a list of values organized by chart components. The primary
+purpose of this is to facilitate minor modification on
+the fly, as well as provide a template for larger changes.
+</p>
+<p>Setting style arguments for TA calls via chartTheme requires
+the user to pass the styles as name=value pairs with a name
+containing the TA call in question.  See examples for assistance.
+</p>
+<p>Current components that may be modified with appropriate
+values:
+</p>
+
+<ul>
+<li> <p><code>fg.col</code>: foreground color
+</p>
+</li>
+<li> <p><code>bg.col</code>: background color
+</p>
+</li>
+<li> <p><code>grid.col</code>: grid color
+</p>
+</li>
+<li> <p><code>border</code>: border color
+</p>
+</li>
+<li> <p><code>minor.tick</code>: minor tickmark color
+</p>
+</li>
+<li> <p><code>major.tick</code>: major tickmark color
+</p>
+</li>
+<li> <p><code>up.col</code>: up bar/candle color
+</p>
+</li>
+<li> <p><code>dn.col</code>: down bar/candle color
+</p>
+</li>
+<li> <p><code>up.up.col</code>: up after up bar/candle color
+</p>
+</li>
+<li> <p><code>up.dn.col</code>: up after down bar/candle color
+</p>
+</li>
+<li> <p><code>dn.dn.col</code>: down after down bar/candle color
+</p>
+</li>
+<li> <p><code>dn.up.col</code>: down after up bar/candle color
+</p>
+</li>
+<li> <p><code>up.border</code>: up bar/candle border color
+</p>
+</li>
+<li> <p><code>dn.border</code>: down bar/candle border color
+</p>
+</li>
+<li> <p><code>up.up.border</code>: up after up bar/candle border color
+</p>
+</li>
+<li> <p><code>up.dn.border</code>: up after down bar/candle border color
+</p>
+</li>
+<li> <p><code>dn.dn.border</code>: down after down bar/candle border color
+</p>
+</li>
+<li> <p><code>dn.up.border</code>: down after up bar/candle border color
+</p>
+</li></ul>
+
+
+
+<h3>Value</h3>
+
+<p>A chart.theme object
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Jeffrey A. Ryan </p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="chartSeries.html">chartSeries</a></code> </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+chartTheme()
+chartTheme('white')
+chartTheme('white',up.col='blue',dn.col='red')
+
+# A TA example
+chartTheme(addRSI.col='red')
+
+str(chartTheme())
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>quantmod</em> version 0.4.26 <a href="00Index.html">Index</a>]</div>
+</body></html>

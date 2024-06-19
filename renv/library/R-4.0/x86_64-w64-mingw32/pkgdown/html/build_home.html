@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Build home section</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for build_home_index {pkgdown}"><tr><td>build_home_index {pkgdown}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Build home section</h2>
+
+<h3>Description</h3>
+
+<p><code>build_home()</code> function generates pages at the top-level of the site
+including:
+</p>
+
+<ul>
+<li><p> The home page
+</p>
+</li>
+<li><p> HTML files from any <code>.md</code> files in <code style="white-space: pre;">./</code> or <code style="white-space: pre;">.github/</code>.
+</p>
+</li>
+<li><p> The authors page (from <code>DESCRIPTION</code>)
+</p>
+</li>
+<li><p> The citation page (from <code>inst/CITATION</code>, if present).
+</p>
+</li>
+<li><p> The license page
+</p>
+</li>
+<li><p> A default 404 page if <code style="white-space: pre;">.github/404.md</code> is not found.
+</p>
+</li></ul>
+
+<p><code>build_home_index()</code> rebuilds just the index page; it's useful for rapidly
+iterating when experimenting with site styles.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+build_home_index(pkg = ".", quiet = TRUE)
+
+build_home(pkg = ".", override = list(), preview = NA, quiet = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>pkg</code></td>
+<td>
+<p>Path to package.</p>
+</td></tr>
+<tr valign="top"><td><code>quiet</code></td>
+<td>
+<p>Set to <code>FALSE</code> to display output of knitr and
+pandoc. This is useful when debugging.</p>
+</td></tr>
+<tr valign="top"><td><code>override</code></td>
+<td>
+<p>An optional named list used to temporarily override
+values in <code style="white-space: pre;">_pkgdown.yml</code></p>
+</td></tr>
+<tr valign="top"><td><code>preview</code></td>
+<td>
+<p>If <code>TRUE</code>, or <code>is.na(preview) &amp;&amp; interactive()</code>, will preview
+freshly generated section in browser.</p>
+</td></tr>
+</table>
+
+
+<h3>Home page</h3>
+
+<p>The main content of the home page (<code>index.html</code>) is generated from <code>pkgdown/index.md</code>, <code>index.md</code>, or <code>README.md</code>, in that order.
+Most packages will use <code>README.md</code> because that's also displayed by GitHub and CRAN.
+Use <code>index.md</code> if you want your package website to look different to your README, and use <code>pkgdown/index.md</code> if you don't want that file to live in your package root directory.
+</p>
+<p>If you use <code>index.Rmd</code> or <code>README.Rmd</code> it's your responsibility to knit the document to create the corresponding <code>.md</code>.
+pkgdown does not do this for you because it only touches files in the <code style="white-space: pre;">doc/</code> directory.
+</p>
+<p>Extra markdown files in the base directory (e.g. <code>ROADMAP.md</code>) or in <code style="white-space: pre;">.github/</code> (e.g. <code>CODE_OF_CONDUCT.md</code>) are copied by <code>build_home()</code> to <code style="white-space: pre;">docs/</code> and converted to HTML.
+</p>
+<p>The home page also features a sidebar with information extracted from the package.
+You can tweak it via the configuration file, to help make the home page an as informative as possible landing page.
+</p>
+
+
+<h4>Images and figures</h4>
+
+<p>If you want to include images in your <code>README.md</code>, they must be stored somewhere in the package so that they can be displayed on the CRAN website.
+The best place to put them is <code>man/figures</code>.
+If you are generating figures with R Markdown, make sure you set up <code>fig.path</code> as followed:
+</p>
+<div class="sourceCode r"><pre>knitr::opts_chunk$set(
+  fig.path = "man/figures/"
+)
+</pre></div>
+<p>This should usually go in a chunk with <code>include = FALSE</code>.
+</p>
+<div class="sourceCode markdown"><pre>```{r chunk-name, include=FALSE}
+knitr::opts_chunk$set(
+  fig.path = "man/figures/"
+)
+```
+</pre></div>
+
+
+
+<h4>Package logo</h4>
+
+<p>If you have a package logo, you can include it at the top of your README in a level-one heading:
+</p>
+<div class="sourceCode markdown"><pre># pkgdown &lt;img src="man/figures/logo.png" align="right" /&gt;
+</pre></div>
+<p><code><a href="init_site.html">init_site()</a></code> will also automatically create a favicon set from your package logo.
+</p>
+
+
+
+<h4>YAML config - home</h4>
+
+<p>To tweak the home page, you need a section of the configuration file called <code>home</code>.
+</p>
+
+
+<h5>Page title and description</h5>
+
+<p>By default, the page title and description are extracted automatically from the <code>Title</code> and <code>Description</code> fields <code>DESCRIPTION</code> (stripping single quotes off quoted words).
+CRAN ensures that these fields don't contain phrases like &quot;R package&quot; because that's obvious on CRAN.
+To make your package more findable on search engines, it's good practice to override the <code>title</code> and <code>description</code>, thinking about what people might search for:
+</p>
+<div class="sourceCode yaml"><pre>home:
+  title: An R package for pool-noodle discovery
+  description: &gt;
+    Do you love R? Do you love pool-noodles? If so, you might enjoy
+    using this package to automatically discover and add pool-noodles
+    to your growing collection.
+</pre></div>
+<p>(Note the use of YAML's <code>&gt;</code> i.e. &quot;YAML pipes&quot;; this is a convenient way of writing paragraphs of text.)
+</p>
+
+
+
+
+<h4>Dev badges</h4>
+
+<p>pkgdown identifies badges in three ways:
+</p>
+
+<ul>
+<li><p> Any image-containing links between <code style="white-space: pre;">&lt;!-- badges: start --&gt;</code> and <code style="white-space: pre;">&lt;!-- badges: end --&gt;</code>, as e.g. created by <code>usethis::use_readme_md()</code> or <code>usethis::use_readme_rmd()</code>.
+There should always be an empty line after the <code style="white-space: pre;">&lt;!-- badges: end --&gt;</code> line.
+If you divide badges into paragraphs, make sure to add an empty line before the <code style="white-space: pre;">&lt;!-- badges: end --&gt;</code> line.
+</p>
+</li>
+<li><p> Any image-containing links within <code style="white-space: pre;">&lt;div id="badges"&gt;&lt;/div&gt;</code>.
+</p>
+</li>
+<li><p> Within the first paragraph, if it only contains image-containing links.
+</p>
+</li></ul>
+
+<p>Identified badges are <strong>removed</strong> from the <em>main content</em>.
+They are shown or not in the <em>sidebar</em> depending on the development mode and sidebar customization, see the sidebar section.
+</p>
+
+
+
+<h3>Authors</h3>
+
+<p>By default, pkgdown will display author information in three places:
+</p>
+
+<ul>
+<li><p> the sidebar,
+</p>
+</li>
+<li><p> the left part side of the footer,
+</p>
+</li>
+<li><p> the author page.
+</p>
+</li></ul>
+
+<p>This documentation describes how to customise the overall author display. See <code>?build_home</code> and <code>?build_site</code> for details about changing the location of the authors information within the home sidebar and the site footer.
+</p>
+
+
+<h4>Authors ORCID and bio</h4>
+
+<p>Author ORCID identification numbers in the <code>DESCRIPTION</code> are linked using the ORCID logo:
+</p>
+<div class="sourceCode r"><pre>Authors@R: c(
+    person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("aut", "cre"),
+      comment = c(ORCID = "0000-0003-4757-117X")
+    ),
+    person("Jay", "Hesselberth", role = "aut",
+      comment = c(ORCID = "0000-0002-6299-179X")
+    )
+  )
+</pre></div>
+<p>If you want to add more details about authors or their involvement with the package,
+you can use the comment field, which will be rendered on the authors page.
+</p>
+<div class="sourceCode r"><pre>Authors@R: c(
+    person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("aut", "cre"),
+      comment = c(ORCID = "0000-0003-4757-117X", "Indenter-in-chief")
+    ),
+    person("Jay", "Hesselberth", role = "aut",
+      comment = c(ORCID = "0000-0002-6299-179X")
+    )
+  )
+</pre></div>
+
+
+
+<h4>YAML config - authors</h4>
+
+<p>You can tweak a few things via the <code>authors</code> YAML field:
+</p>
+
+<ul>
+<li><p> display of each author in the footer, sidebar and authors page,
+</p>
+</li>
+<li><p> which authors (by role) are displayed in the sidebar and footer,
+</p>
+</li>
+<li><p> text before authors in the footer,
+</p>
+</li>
+<li><p> text before and after authors in the sidebar,
+</p>
+</li>
+<li><p> text before and after authors on the authors page.
+</p>
+</li></ul>
+
+<p>You can modify how each author's name is displayed
+by adding a subsection for <code>authors</code>.
+Each entry in <code>authors</code> should be named
+with the author's name (matching <code>DESCRIPTION</code>)
+and can contain <code>href</code> and/or <code>html</code> fields:
+</p>
+
+<ul>
+<li><p> If <code>href</code> is provided, the author's name will be linked to this URL.
+</p>
+</li>
+<li><p> If <code>html</code> is provided, it will be shown instead of the author's name.
+This is particularly useful if you want to display the logo of a corporate
+sponsor. Use an absolute URL to an image, not a relative link.
+Use an empty alternative text rather than no alternative text so a screen-reader
+would skip over it.
+</p>
+</li></ul>
+
+<div class="sourceCode yaml"><pre>authors:
+  firstname lastname:
+    href: "http://name-website.com"
+    html: "&lt;img src='https://website.com/name-picture.png' width=72 alt=''&gt;"
+</pre></div>
+<p>By default, the &quot;developers&quot; list shown in the sidebar and footer is populated by the maintainer (&quot;cre&quot;), authors
+(&quot;aut&quot;), and funder (&quot;fnd&quot;) from the <code>DESCRIPTION</code>.
+You could choose other roles for filtering.
+With the configuration below:
+</p>
+
+<ul>
+<li><p> only the maintainer and funder(s) appear in the footer, after the text &quot;Crafted by&quot;,
+</p>
+</li>
+<li><p> all authors and contributors appear in the sidebar,
+</p>
+</li>
+<li><p> the authors list on the sidebar is preceded and followed by some text,
+</p>
+</li>
+<li><p> the authors list on the authors page is preceded and followed by some text.
+</p>
+</li></ul>
+
+<div class="sourceCode yaml"><pre>authors:
+  footer:
+    roles: [cre, fnd]
+    text: "Crafted by"
+  sidebar:
+    roles: [aut, ctb]
+    before: "So *who* does the work?"
+    after: "Thanks all!"
+  before: "This package is proudly brought to you by:"
+  after: "See the [changelog](news/index.html) for other contributors. :pray:"
+</pre></div>
+<p>If you want to filter authors based on something else than their roles,
+consider using a custom sidebar/footer component
+(see <code>?build_home</code>/<code>?build_site</code>, respectively).
+</p>
+
+
+
+<h3>Sidebar</h3>
+
+<p>You can customise the homepage sidebar with the <code>home.sidebar</code> field.
+It's made up of two pieces: <code>structure</code>, which defines the overall layout, and <code>components</code>, which defines what each piece looks like.
+This organisation makes it easy to mix and match the pkgdown defaults with your own customisations.
+</p>
+<p>This is the default structure:
+</p>
+<div class="sourceCode yaml"><pre>home:
+  sidebar:
+    structure: [links, license, community, citation, authors, dev]
+</pre></div>
+<p>These are drawn from seven built-in components:
+</p>
+
+<ul>
+<li> <p><code>links</code>: automated links generated from <code>URL</code> and <code>BugReports</code> fields from <code>DESCRIPTION</code> plus manual links from the <code>home.links</code> field:
+</p>
+<div class="sourceCode yaml"><pre>home:
+  links:
+  - text: Link text
+    href: https://website.com
+  - text: Roadmap
+    href: /roadmap.html
+</pre></div>
+</li>
+<li> <p><code>license</code>: Licensing information if <code>LICENSE</code>/<code>LICENCE</code> or <code>LICENSE.md</code>/<code>LICENCE.md</code> files are present.
+</p>
+</li>
+<li> <p><code>community</code>: links to to <code>.github/CONTRIBUTING.md</code>, <code>.github/CODE_OF_CONDUCT.md</code>, etc.
+</p>
+</li>
+<li> <p><code>citation</code>: link to package citation information. Uses either <code>inst/CITATION</code> or, if absent, information from the <code>DESCRIPTION</code>.
+</p>
+</li>
+<li> <p><code>authors</code>: selected authors from the <code>DESCRIPTION</code>.
+</p>
+</li>
+<li> <p><code>dev</code>: development status badges extracted from <code>README.md</code>/<code>index.md</code>. This is only shown for &quot;development&quot; versions of websites; see &quot;Development mode&quot; in <code>?build_site</code> for details.
+</p>
+</li>
+<li> <p><code>toc</code>: a table of contents for the README (not shown by default).
+</p>
+</li></ul>
+
+<p>You can also add your own components, where <code>text</code> is markdown text:
+</p>
+<div class="sourceCode yaml"><pre>home:
+  sidebar:
+    structure: [authors, custom, toc, dev]
+    components:
+      custom:
+        title: Funding
+        text: We are *grateful* for funding!
+</pre></div>
+<p>Alternatively, you can provide a ready-made sidebar HTML:
+</p>
+<div class="sourceCode yaml"><pre>home:
+  sidebar:
+    html: path-to-sidebar.html
+</pre></div>
+<p>Or completely remove it:
+</p>
+<div class="sourceCode yaml"><pre>home:
+  sidebar: FALSE
+</pre></div>
+
+<hr /><div style="text-align: center;">[Package <em>pkgdown</em> version 2.0.9 <a href="00Index.html">Index</a>]</div>
+</body></html>

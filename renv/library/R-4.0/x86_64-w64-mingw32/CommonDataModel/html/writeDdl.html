@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Write DDL script</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for writeDdl {CommonDataModel}"><tr><td>writeDdl {CommonDataModel}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Write DDL script</h2>
+
+<h3>Description</h3>
+
+<p>Write the DDL to a SQL file. The SQL will be rendered (parameters replaced) and translated to the target SQL
+dialect. By default the @cdmDatabaseSchema parameter is kept in the SQL file and needs to be replaced before
+execution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+writeDdl(
+  targetDialect,
+  cdmVersion,
+  outputfolder,
+  cdmDatabaseSchema = "@cdmDatabaseSchema"
+)
+
+writePrimaryKeys(
+  targetDialect,
+  cdmVersion,
+  outputfolder,
+  cdmDatabaseSchema = "@cdmDatabaseSchema"
+)
+
+writeForeignKeys(
+  targetDialect,
+  cdmVersion,
+  outputfolder,
+  cdmDatabaseSchema = "@cdmDatabaseSchema"
+)
+
+writeIndex(
+  targetDialect,
+  cdmVersion,
+  outputfolder,
+  cdmDatabaseSchema = "@cdmDatabaseSchema"
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>targetDialect</code></td>
+<td>
+<p>The dialect of the target database. Support dialects are specified by SqlRender::listSupportedDialects</p>
+</td></tr>
+<tr valign="top"><td><code>cdmVersion</code></td>
+<td>
+<p>The version of the CDM you are creating, e.g. 5.3, 5.4</p>
+</td></tr>
+<tr valign="top"><td><code>outputfolder</code></td>
+<td>
+<p>The directory or folder where the SQL file should be saved.</p>
+</td></tr>
+<tr valign="top"><td><code>cdmDatabaseSchema</code></td>
+<td>
+<p>The schema of the CDM instance where the DDL will be run. For example, this would be &quot;ohdsi.dbo&quot; when testing on sql server.
+Defaults to &quot;@cdmDatabaseSchema&quot;</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Writes SQL file with the OMOP CDM DDL for the specified CDM version and target dialect in the output folder.
+</p>
+<p>Writes a SQL file with the primary keys for the OMOP CDM based on the specified target dialect and CDM version.
+</p>
+<p>Writes a SQL file with the foreign keys for the OMOP CDM based on the specified target dialect and CDM version.
+</p>
+<p>Writes a SQL file with the indices for the OMOP CDM based on the specified target dialect and CDM version.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>writePrimaryKeys()</code>: writePrimaryKeys Write the SQL code that creates the primary keys to a file.
+</p>
+</li>
+<li> <p><code>writeForeignKeys()</code>: writeForeignKeys Write the SQL code that creates the foreign keys to a file.
+</p>
+</li>
+<li> <p><code>writeIndex()</code>: writeIndex Write the rendered and translated sql that creates recommended indexes to a file.
+</p>
+</li></ul>
+
+<hr /><div style="text-align: center;">[Package <em>CommonDataModel</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

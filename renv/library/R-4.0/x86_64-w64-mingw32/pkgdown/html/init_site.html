@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Initialise site infrastructure</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for init_site {pkgdown}"><tr><td>init_site {pkgdown}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Initialise site infrastructure</h2>
+
+<h3>Description</h3>
+
+<p><code>init_site()</code>:
+</p>
+
+<ul>
+<li><p> creates the output directory (<code style="white-space: pre;">docs/</code>),
+</p>
+</li>
+<li><p> generates a machine readable description of the site, used for autolinking,
+</p>
+</li>
+<li><p> copies CSS/JS assets and extra files, and
+</p>
+</li>
+<li><p> runs <code>build_favicons()</code>, if needed.
+</p>
+</li></ul>
+
+<p>See <code>vignette("customise")</code> for the various ways you can customise the
+display of your site.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+init_site(pkg = ".")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>pkg</code></td>
+<td>
+<p>Path to package.</p>
+</td></tr>
+</table>
+
+
+<h3>Build-ignored files</h3>
+
+<p>We recommend using <code><a href="../../usethis/html/use_pkgdown.html">usethis::use_pkgdown()</a></code> to build-ignore <code style="white-space: pre;">docs/</code> and
+<code style="white-space: pre;">_pkgdown.yml</code>. If use another directory, or create the site manually,
+you'll need to add them to <code>.Rbuildignore</code> yourself. A <code>NOTE</code> about
+an unexpected file during <code style="white-space: pre;">R CMD CHECK</code> is an indication you have not
+correctly ignored these files.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>pkgdown</em> version 2.0.9 <a href="00Index.html">Index</a>]</div>
+</body></html>
