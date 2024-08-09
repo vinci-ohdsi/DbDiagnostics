@@ -1,8 +1,8 @@
 Package: DbDiagnostics
 Type: Package
 Title: OMOP CDM Database Diagnostics Utility
-Version: 1.4
-Date: 2022-07-08
+Version: 1.5.1
+Date: 2022-07-22
 Authors@R: c(
   person("Clair", "Blacketer", , "mblacke@its.jnj.com", role = c("aut", "cre")),
 	person("Frank", "DeFalco", role = c("aut"))
@@ -23,4 +23,4 @@ Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
 Author: Clair Blacketer [aut, cre],
   Frank DeFalco [aut]
-Built: R 4.0.3; ; 2024-08-09 18:37:11 UTC; windows
+Built: R 4.0.3; ; 2024-08-09 18:38:50 UTC; windows
